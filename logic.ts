@@ -18,12 +18,13 @@ export function shouldBypassDnd(
     serverIds: string,
     mode: "whitelist" | "blacklist",
     authorId?: string,
-    guildId?: string
+    guildId?: string,
+    allDms = false
 ): boolean {
     const users = parseIds(userIds);
     const servers = parseIds(serverIds);
     if (!authorId || users === null || servers === null) return false;
 
-    const listed = users.includes(authorId) || (guildId != null && servers.includes(guildId));
+    const listed = users.includes(authorId) || (guildId != null && servers.includes(guildId)) || (allDms && guildId == null);
     return mode === "whitelist" ? listed : mode === "blacklist" && !listed;
 }
