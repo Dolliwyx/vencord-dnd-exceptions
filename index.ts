@@ -41,7 +41,7 @@ const settings = definePluginSettings({
 export default definePlugin({
     name: "DndExceptions",
     description: "Allow selected message notifications through Do Not Disturb without changing your status.",
-    authors: [{ name: "Local", id: 0n }],
+    authors: [{ name: "Local", id: 296862433136476160n }],
     tags: ["Notifications"],
     settings,
 
