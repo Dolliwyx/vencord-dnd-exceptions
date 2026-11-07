@@ -25,6 +25,11 @@ const settings = definePluginSettings({
         default: "",
         isValid: validateIds
     },
+    allDms: {
+        type: OptionType.BOOLEAN,
+        description: "Treat every DM and group DM as listed (an exception in whitelist mode, excluded in blacklist mode).",
+        default: false
+    },
     serverIds: {
         type: OptionType.STRING,
         description: "Comma-separated server IDs. Only DND is bypassed; mute, mention-only, and sound settings still apply.",
@@ -53,7 +58,7 @@ export default definePlugin({
         const channel = ChannelStore.getChannel(channelId);
         if (!channel) return false;
 
-        const { userIds, serverIds, listMode } = settings.store;
-        return shouldBypassDnd(userIds, serverIds, listMode, message.author?.id, channel.guild_id);
+        const { userIds, serverIds, listMode, allDms } = settings.store;
+        return shouldBypassDnd(userIds, serverIds, listMode, message.author?.id, channel.guild_id, allDms);
     }
 });
